@@ -1,7 +1,17 @@
 //passing an initial state and action to the function
-export default function movies (state = [], action) {
-    if(action.type === 'ADD_MOVIES') {
-        return action.movies;
+import { ADD_MOVIES } from "../actions";
+
+const initialMovieState = {
+    list: [],
+    favourites: []
+}
+export default function movies (state = initialMovieState, action) {
+    if(action.type === ADD_MOVIES) {
+        return {
+            ...state,
+            list: action.movies //this action will return the same state 
+            // passed to it by updating list key value
+        };
     }
     return state;
 }

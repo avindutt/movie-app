@@ -1,9 +1,10 @@
 //passing an initial state and action to the function
-import { ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE } from "../actions";
+import { ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES } from "../actions";
 
 const initialMovieState = {
     list: [],
-    favourites: []
+    favourites: [],
+    showFavourites: false
 }
 export default function movies (state = initialMovieState, action) {
     // if(action.type === ADD_MOVIES) {
@@ -28,11 +29,16 @@ export default function movies (state = initialMovieState, action) {
                 // favourites array would already be having some movies into it and they must not get lost. 
             }
         case REMOVE_FAVOURITE:
-        const filteredArray = state.favourites.filter((movie) => movie.title !== action.movie.title);
+        const filteredArray = state.favourites.filter((movie) => movie.Title !== action.movie.Title);
             return {
                 ...state,
                 favourites: filteredArray
-            };
+            }
+        case SET_SHOW_FAVOURITES:
+            return {
+                ...state,
+                showFavourites: action.val
+            }
         default:
             return state;
     }
